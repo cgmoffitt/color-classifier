@@ -39,8 +39,9 @@ def prepare_data():
     print(colors)
     labelsList = np.array(labelsList)
     ys = keras.backend.one_hot(labelsList, 9)
-
     print(ys)
+
+
 
     model = keras.Sequential()
 
