@@ -36,30 +36,24 @@ def prepare_data():
             colors.append(col)
             labelsList.append(labels.index(word[3].rstrip("\n")))
     xs = np.array(colors)
-    print(colors)
     labelsList = np.array(labelsList)
     ys = keras.backend.one_hot(labelsList, 9)
-    print(ys)
+    return xs, ys
 
-
-
+def buildModel():
     model = keras.Sequential()
-
     model.add(keras.layers.Dense(units=16, activation='sigmoid', input_shape=[3]))
-
     model.add(keras.layers.Dense(units=9, activation='softmax'))
-
-    # create an optimizer
     opt = keras.optimizers.SGD(learning_rate=0.2)
-    # MeanSquareError ->CrossEntropy
-    model.compile(optimizer=opt, loss='categoricalCrossentropy')
+    model.compile(optimizer=opt, loss='categorical_crossentropy')
+    return model
 
-    model.fit(xs, ys)
-    # training
 
 
 def main():
-    prepare_data()
+    xs, ys = prepare_data()
+    model = buildModel()
+    model.fit(x=xs,y=ys, epochs=500) #train model
 
 
 main()
