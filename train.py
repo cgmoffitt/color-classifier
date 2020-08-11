@@ -19,7 +19,8 @@ def prepare_data():
         "pink",
         "purple",
         "brown",
-        "grey"
+        "grey",
+        "black"
     ]
     labelsList = []
 
@@ -39,13 +40,13 @@ def prepare_data():
             labelsList.append(labels.index(word[3].rstrip("\n")))
     xs = np.array(colors)
     labelsList = np.array(labelsList)
-    ys = keras.backend.one_hot(labelsList, 9)
+    ys = keras.backend.one_hot(labelsList, 10)
     return xs, ys
 
 def buildModel():
     model = keras.Sequential()
     model.add(keras.layers.Dense(units=16, activation='sigmoid', input_shape=[3]))
-    model.add(keras.layers.Dense(units=9, activation='softmax'))
+    model.add(keras.layers.Dense(units=10, activation='softmax'))
     opt = keras.optimizers.SGD(learning_rate=0.2)
     model.compile(optimizer=opt, loss='categorical_crossentropy')
     return model
