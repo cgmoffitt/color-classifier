@@ -2,6 +2,8 @@
 import keras
 import os
 import numpy as np
+import tensorflow as tf
+from keras import backend as K
 
 model = 0
 
@@ -47,7 +49,6 @@ def buildModel():
     opt = keras.optimizers.SGD(learning_rate=0.2)
     model.compile(optimizer=opt, loss='categorical_crossentropy')
     return model
-
 
 
 def main():
